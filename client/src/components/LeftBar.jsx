@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 
 
-const baseURL = 'http://localhost:8000';
+const baseURL = 'http://52.66.10.10:8000';
 
 
 const LeftBar = ({ employeeId }) => {

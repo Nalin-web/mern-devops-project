@@ -1,0 +1,26 @@
+services:
+
+  mongodb:
+    image: mongo:7
+    container_name: mongodb
+    ports:
+      - "27017:27017"
+
+  backend:
+    image: ems-backend
+    container_name: backend
+    ports:
+      - "8000:8000"
+    environment:
+      PORT: 8000
+      DATABASE_URL: mongodb://mongodb:27017
+    depends_on:
+      - mongodb
+
+  frontend:
+    image: ems-frontend
+    container_name: frontend
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
