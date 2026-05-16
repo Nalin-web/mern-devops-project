@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+
+metadata:
+  name: backend
+  namespace: ems
+
+spec:
+  replicas: 1
+
+  selector:
+    matchLabels:
+      app: backend
+
+  template:
+    metadata:
+      labels:
+        app: backend
+
+    spec:
+      containers:
+      - name: backend
+        image: 931753623746.dkr.ecr.ap-south-1.amazonaws.com/ems-backend:latest
+
+        ports:
+        - containerPort: 8000
+
+        env:
+        - name: PORT
+          value: "8000"
+
+        - name: DATABASE_URL
+          value: mongodb://mongodb-service:27017
