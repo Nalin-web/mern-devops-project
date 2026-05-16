@@ -1,11 +1,13 @@
 pipeline {
 agent any
 
+
 environment {
     AWS_ACCOUNT_ID = "931753623746"
     AWS_REGION = "ap-south-1"
     BACKEND_REPO = "ems-backend"
     FRONTEND_REPO = "ems-frontend"
+    IMAGE_TAG = "${BUILD_NUMBER}"
 }
 
 stages {
@@ -33,7 +35,7 @@ stages {
     stage('Tag Backend Image') {
         steps {
             sh '''
-            docker tag ems-backend:latest $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$BACKEND_REPO:latest
+            docker tag ems-backend:latest $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$BACKEND_REPO:$IMAGE_TAG
             '''
         }
     }
@@ -41,7 +43,7 @@ stages {
     stage('Tag Frontend Image') {
         steps {
             sh '''
-            docker tag ems-frontend:latest $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$FRONTEND_REPO:latest
+            docker tag ems-frontend:latest $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$FRONTEND_REPO:$IMAGE_TAG
             '''
         }
     }
@@ -49,7 +51,7 @@ stages {
     stage('Push Backend Image') {
         steps {
             sh '''
-            docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$BACKEND_REPO:latest
+            docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$BACKEND_REPO:$IMAGE_TAG
             '''
         }
     }
@@ -57,7 +59,7 @@ stages {
     stage('Push Frontend Image') {
         steps {
             sh '''
-            docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$FRONTEND_REPO:latest
+            docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$FRONTEND_REPO:$IMAGE_TAG
             '''
         }
     }
@@ -76,5 +78,5 @@ stages {
     }
 }
 
-}
 
+}
