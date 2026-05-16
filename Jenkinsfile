@@ -2,7 +2,7 @@ pipeline {
 agent any
 
 environment {
-    AWS_ACCOUNT_ID = "ACCOUNT-ID"
+    AWS_ACCOUNT_ID = "931753623746"
     AWS_REGION = "ap-south-1"
     BACKEND_REPO = "ems-backend"
     FRONTEND_REPO = "ems-frontend"
