@@ -1,4 +1,4 @@
-pipeline {
+ipipeline {
 agent any
 
 
@@ -18,8 +18,8 @@ stages {
 
     stage('Deploy Containers') {
         steps {
-            sh 'docker compose down'
-            sh 'docker compose up -d'
+            sh 'docker-compose down'
+            sh 'docker-compose up -d'
         }
     }
 
