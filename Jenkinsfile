@@ -18,8 +18,8 @@ stages {
 
     stage('Deploy Containers') {
         steps {
-            sh '/usr/bin/docker compose down'
-            sh '/usr.bin/docker-compose up -d'
+            sh '/usr/local/bin/docker-compose down'
+            sh '/usr/local/bin/docker-compose up -d'
         }
     }
 
