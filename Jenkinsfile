@@ -4,21 +4,33 @@ agent any
 
 stages {
 
-    stage('Check Files') {
-        steps {
-            sh 'pwd'
-            sh 'ls -la'
-            sh 'find . -maxdepth 3'
-        }
-    }
-
     stage('Build Backend Image') {
         steps {
-            sh 'docker build -t ems-backend ./backend'
+            sh 'docker build -t ems-backend ./server'
+        }
+    }
+
+    stage('Build Frontend Image') {
+        steps {
+            sh 'docker build -t ems-frontend ./client'
+        }
+    }
+
+    stage('Deploy Containers') {
+        steps {
+            sh 'docker compose down'
+            sh 'docker compose up -d'
+        }
+    }
+
+    stage('Verify Deployment') {
+        steps {
+            sh 'docker ps'
         }
     }
 }
 
 
 }
+
 
